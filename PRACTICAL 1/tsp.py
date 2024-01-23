@@ -99,12 +99,12 @@ if __name__ == "__main__":
 
     # DFS
     start_time_dfs = timeit.default_timer()
-    path, dist = tsp_dfs(graph_1, start, end)
+    path, dist = tsp_dfs(graph_2, start, end)
     execution_time_dfs = timeit.default_timer() - start_time_dfs
 
     # BFS
     start_time_bfs = timeit.default_timer()
-    path, dist = tsp_bfs(graph_1, start, end)
+    path, dist = tsp_bfs(graph_2, start, end)
     execution_time_bfs = timeit.default_timer() - start_time_bfs
 
     print("\nDFS Path:", "".join(path))
