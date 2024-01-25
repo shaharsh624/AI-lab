@@ -9,11 +9,12 @@ def tsp_dfs(graph, start, end, visited, cost):
     print(start, ":", neighbours)
     
     x = list(set(neighbours) - (visited))
-    print("neighbours-visited", ":", x)
+    # print("neighbours-visited", ":", x)
     
     for adj in x:
-        print(start, ":", adj)
+        # print(start, ":", adj)
         tsp_dfs(graph, adj, end, visited, cost)
+        visited.remove(adj)
 
     # while queue:
     #     vertex = queue.popleft()
@@ -39,13 +40,17 @@ def tsp_dfs(graph, start, end, visited, cost):
 
 if __name__ == "__main__":
     graph = {
-        "A": {"B": 22, "C": 48, "D": 28},
-        "B": {"A": 22, "C": 20, "D": 18},
-        "C": {"A": 48, "B": 20, "D": 32},
-        "D": {"A": 28, "B": 18, "C": 32},
+        "A": {"B": 2, "G": 6},
+        "B": {"A": 2, "C": 7, "E": 2},
+        "C": {"B": 7, "D": 3, "F": 3},
+        "D": {"C": 3, "H": 2},
+        "E": {"B": 2, "F": 2, "G": 1},
+        "F": {"C": 3, "E": 2, "H": 2},
+        "G": {"A": 6, "E": 1, "H": 4},
+        "H": {"D": 2, "F": 2, "G": 4},
     }
     start = "A"
-    end = "D"
+    end = "H"
     count = len(graph)
 
     tsp_dfs(graph, start, end, set(), 0)

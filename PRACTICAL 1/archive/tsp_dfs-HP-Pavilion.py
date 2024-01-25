@@ -9,18 +9,16 @@ def calculate_dist(graph, path):
 def tsp_dfs(graph, current, visited, path, min_distance, optimal_path):
     if len(visited) == len(graph):
         distance = calculate_dist(graph, path)
-        if distance < min_distance[0]:
-            min_distance[0] = distance
+        if distance < min_distance:
+            min_distance = distance
             optimal_path[0] = path[:]
         return
 
-    # Visit all unvisited neighbours
     for neighbour in range(len(graph)):
         if neighbour not in visited:
             path.append(neighbour)
             visited.add(neighbour)
             tsp_dfs(graph, neighbour, visited, path, min_distance, optimal_path)
-            # Backtrack: remove current from path and visited set
             path.pop()
             visited.remove(neighbour)
 
@@ -28,10 +26,10 @@ def tsp_dfs(graph, current, visited, path, min_distance, optimal_path):
 def tsp_wrapper(graph):
     start = 0
     visited = {start}
-    min_distance = [float("inf")]
+    min_distance = 1000000
     optimal_path = [None]
     tsp_dfs(graph, start, visited, [start], min_distance, optimal_path)
-    return optimal_path[0], min_distance[0]
+    return optimal_path[0], min_distance
 
 
 def generate_adj_matrix(graph):
@@ -46,7 +44,6 @@ def generate_adj_matrix(graph):
 
 
 if __name__ == "__main__":
-    # Define the graph with cities as nodes and distances as edges
     graph_1 = {
         "A": {"B": 22, "C": 48, "D": 28},
         "B": {"A": 22, "C": 20, "D": 18},
@@ -68,6 +65,8 @@ if __name__ == "__main__":
     adj_matrix = generate_adj_matrix(graph_2)
     optimal_path, min_distance = tsp_wrapper(adj_matrix)
 
+    print(adj_matrix)
+
     nodes = list(graph_2.keys())
     path = ""
 
@@ -75,4 +74,5 @@ if __name__ == "__main__":
         path += nodes[int(x)]
 
     print("Optimal Path:", optimal_path)
+    print("Optimal Path:", path)
     print("Minimum Distance:", min_distance)
