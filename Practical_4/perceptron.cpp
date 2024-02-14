@@ -39,7 +39,6 @@ int main()
     vector<int> labels = {0, 1, 0, 1, 0, 1, 0, 1};
 
     learningRate = 0.1;
-
     weights = vector<double>(inputs[0].size(), 0.0);
 
     // Train the perceptron
