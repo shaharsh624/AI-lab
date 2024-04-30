@@ -1,17 +1,24 @@
+symptom(cough).
+symptom(sore_throat).
+symptom(runny_nose).
+symptom(headache).
+symptom(muscle_aches).
+symptom(fatigue).
 
-male(harry).  
-female(liz).  
- 
-parent(phil, chas).  
-parent(liz, chas).  
-parent(chas,harry).  
-parent(chas,wills).  
- 
- 
-grandmother(GM, C):-  
-    mother(GM, P),  
-    parent(P, C).  
- 
-mother(M,C):-  
-    female(M),  
-    parent(M, C).  
+diagnosis(cold) :-
+    symptom(fever),
+    symptom(cough),
+    symptom(runny_nose),
+    not(symptom(headache)),
+    not(symptom(muscle_aches)),
+    not(symptom(sore_throat)),
+    not(symptom(fatigue)).
+
+diagnosis(flu) :-
+    symptom(fever),
+    symptom(cough),
+    symptom(runny_nose),
+    symptom(headache),
+    symptom(muscle_aches),
+    symptom(fatigue),
+    not(symptom(sore_throat)).

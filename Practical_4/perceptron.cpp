@@ -5,6 +5,7 @@ using namespace std;
 
 vector<double> weights;
 double learningRate;
+double b = 0;
 
 // Dot product function
 double dotProduct(const vector<double> &v1, const vector<double> &v2)
@@ -12,7 +13,7 @@ double dotProduct(const vector<double> &v1, const vector<double> &v2)
     double sum = 0.0;
     for (int i = 0; i < v1.size(); ++i)
     {
-        sum += v1[i] * v2[i];
+        sum += (v1[i] * v2[i]) + b;
     }
     return sum;
 }
@@ -28,6 +29,7 @@ void train(const vector<double> &input, int label)
         for (int i = 0; i < weights.size(); ++i)
         {
             weights[i] += learningRate * (label - predictedLabel) * input[i];
+            b += learningRate * (label - predictedLabel);
         }
     }
 }
@@ -42,7 +44,7 @@ int main()
     weights = vector<double>(inputs[0].size(), 0.0);
 
     // Train the perceptron
-    int numEpochs = 100;
+    int numEpochs = 50;
     for (int epoch = 0; epoch < numEpochs; ++epoch)
     {
         for (int i = 0; i < inputs.size(); ++i)
@@ -51,12 +53,13 @@ int main()
         }
     }
 
-    cout << "Learned weights:" << endl;
+    cout << "Learned weights: ";
     for (double weight : weights)
     {
         cout << weight << " ";
     }
     cout << endl;
+    cout << "Learned Bias: " << b << endl;
 
     return 0;
 }

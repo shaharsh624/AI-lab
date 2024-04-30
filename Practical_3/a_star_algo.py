@@ -13,8 +13,8 @@ def a_star(initial_state, goal_state, h, path):
             if f[state] <= min_f:
                 BEST_NODE = state
                 min_f = f[state]
-                print(BEST_NODE)
         OPEN.remove(BEST_NODE)
+        print(BEST_NODE)
         if BEST_NODE == goal_state:
             return
 
@@ -27,35 +27,7 @@ def a_star(initial_state, goal_state, h, path):
                 parents[neighbour] = BEST_NODE
                 g[neighbour] = g[BEST_NODE] + path[BEST_NODE][neighbour]
                 f[neighbour] = g[neighbour] + h[neighbour]
-        print(parents)
-
-    # while OPEN:
-    #     min_f = min(f.values())
-    #     for state in OPEN:
-    #         if f[state] <= min_f:
-    #             BEST_NODE = state
-    #             break
-    #     OPEN.remove(BEST_NODE)
-    #     CLOSED.add(BEST_NODE)
-
-    #     if BEST_NODE == goal_state:
-    #         return
-
-    #     # Backward Links
-    #     SUCCESSORS = {state: BEST_NODE for state in (path[BEST_NODE].keys())}
-
-    #     for SUCCESSOR in SUCCESSORS:
-    #         g[SUCCESSOR] = g[BEST_NODE] + path[BEST_NODE][SUCCESSOR]
-
-    #         if SUCCESSOR in OPEN:
-    #             OLD = SUCCESSOR
-    #         elif SUCCESSOR not in OPEN and SUCCESSOR in CLOSED:
-    #             CLOSED_OLD = SUCCESSOR
-    #         else:
-    #             OPEN.add(SUCCESSOR)
-    #             SUCCESSORS[SUCCESSOR] = BEST_NODE
-
-    #     print(SUCCESSORS)
+        # print(parents)
 
 
 if __name__ == "__main__":
@@ -71,3 +43,33 @@ if __name__ == "__main__":
     }
 
     a_star("S", "G", h, path)
+
+"""
+    while OPEN:
+        min_f = min(f.values())
+        for state in OPEN:
+            if f[state] <= min_f:
+                BEST_NODE = state
+                break
+        OPEN.remove(BEST_NODE)
+        CLOSED.add(BEST_NODE)
+
+        if BEST_NODE == goal_state:
+            return
+
+        # Backward Links
+        SUCCESSORS = {state: BEST_NODE for state in (path[BEST_NODE].keys())}
+
+        for SUCCESSOR in SUCCESSORS:
+            g[SUCCESSOR] = g[BEST_NODE] + path[BEST_NODE][SUCCESSOR]
+
+            if SUCCESSOR in OPEN:
+                OLD = SUCCESSOR
+            elif SUCCESSOR not in OPEN and SUCCESSOR in CLOSED:
+                CLOSED_OLD = SUCCESSOR
+            else:
+                OPEN.add(SUCCESSOR)
+                SUCCESSORS[SUCCESSOR] = BEST_NODE
+
+        print(SUCCESSORS)
+"""

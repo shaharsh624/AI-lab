@@ -46,6 +46,7 @@ def water_jug_BFS(x, y, z):
 
     return [], False
 
+
 if __name__ == "__main__":
     n = int(input("Enter jug A's capacity (n): "))
     m = int(input("Enter jug B's capacity (m): "))
